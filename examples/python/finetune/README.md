@@ -10,3 +10,6 @@ python -m moonshine_voice.lora --dataset atcosim --output-dir ./lora_atc
 ```
 
 `[lora]` is the same extra. `moonshine-voice finetune` is the same command.
+
+For Malay and Manglish (Malaysian English), [`malaysia/`](malaysia/README.md)
+builds `--train-manifest` data from public corpora.

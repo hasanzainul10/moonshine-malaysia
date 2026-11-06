@@ -1,0 +1,95 @@
+{
+  "_readme": "Every source starts disabled. Run `prepare_malaysia.py inspect --repo <repo>` (hub) or open the file (table/manifest), fix files/columns, then set enabled true. Licences were taken from search results, not verified: read each card before use, and before any commercial use.",
+  "sources": [
+    {
+      "name": "mesolitica_stt_whisper",
+      "enabled": false,
+      "type": "hub",
+      "repo": "mesolitica/Malaysian-STT-Whisper",
+      "files": "**/*.parquet",
+      "role": "train",
+      "hours": 300,
+      "license": "licence not stated in search results: check the card. Malaysian speech with Malay/English code-switching; Mandarin/Tamil rows are dropped by the script filter",
+      "_note": "If audio sits in zip files instead of parquet bytes, download and unzip it, set audio_root to that folder, or convert to a manifest source"
+    },
+    {
+      "name": "malaya_speech_malay_stt",
+      "enabled": false,
+      "type": "hub",
+      "repo": "mesolitica/malaya-speech-malay-stt",
+      "files": "**/*.parquet",
+      "role": "train",
+      "hours": 200,
+      "license": "licence not stated in search results: check the card. Transcripts are largely machine-labelled (semi-supervised), so expect noise"
+    },
+    {
+      "name": "fleurs_ms_train",
+      "enabled": false,
+      "type": "hub",
+      "repo": "google/fleurs",
+      "revision": "refs/convert/parquet",
+      "files": "ms_my/train/*.parquet",
+      "text_column": "transcription",
+      "role": "train",
+      "license": "CC-BY-4.0. Formal read Malay, about 9.5 h. No speaker id, so it cannot be speaker-split; use fleurs_ms_test for scoring"
+    },
+    {
+      "name": "fleurs_ms_test",
+      "enabled": false,
+      "type": "hub",
+      "repo": "google/fleurs",
+      "revision": "refs/convert/parquet",
+      "files": "ms_my/test/*.parquet",
+      "text_column": "transcription",
+      "role": "test",
+      "license": "CC-BY-4.0. Formal read Malay test set, about 2.3 h. Never train on it"
+    },
+    {
+      "name": "commonvoice_ms_spontaneous",
+      "enabled": false,
+      "type": "table",
+      "path": "downloads/cv-spontaneous-ms/ss-corpus-ms.tsv",
+      "audio_root": "downloads/cv-spontaneous-ms/audios",
+      "role": "train",
+      "license": "CC0 (Common Voice Spontaneous Speech 3.0, ms-MY, about 6 h). Colloquial, unscripted. Download from Mozilla Data Collective; adjust path/columns to the files you get"
+    },
+    {
+      "name": "commonvoice_ms_scripted",
+      "enabled": false,
+      "type": "table",
+      "path": "downloads/cv-corpus-ms/ms/validated.tsv",
+      "audio_root": "downloads/cv-corpus-ms/ms/clips",
+      "audio_column": "path",
+      "text_column": "sentence",
+      "speaker_column": "client_id",
+      "role": "train",
+      "license": "CC0 (Common Voice Scripted Speech, ms, about 3.6 h, very little validated)"
+    },
+    {
+      "name": "imda_nsc",
+      "enabled": false,
+      "type": "manifest",
+      "path": "downloads/imda_nsc/manifest.jsonl",
+      "role": "train",
+      "hours": 300,
+      "license": "Singapore Open Data Licence (commercial use on request). Singapore English, the closest large open source to Manglish. Download from IMDA and convert its transcripts to a JSONL manifest with a speaker field"
+    },
+    {
+      "name": "magichub_malcsc",
+      "enabled": false,
+      "type": "manifest",
+      "path": "downloads/malcsc/manifest.jsonl",
+      "role": "train",
+      "license": "Reported CC BY-NC-ND 4.0: research only. 5 h conversational Malay from MagicHub"
+    },
+    {
+      "name": "revolab_benchmark",
+      "enabled": false,
+      "type": "hub",
+      "repo": "Revolab/ASR-Benchmark-Public",
+      "files": "**/*.parquet",
+      "role": "test",
+      "license": "Annotations CC-BY-4.0, audio under original terms; gated (accept terms on the Hub). Malay/English code-switching, about 2.2 h. Evaluation only"
+    }
+  ]
+}
